@@ -1,0 +1,10 @@
+import { UserRole } from '../../models/User';
+
+declare namespace Express {
+    export interface Request {
+        user?: {
+            id: string;
+            role: UserRole;
+        }
+    }
+} 
