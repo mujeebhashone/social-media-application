@@ -24,6 +24,8 @@ export interface IUser {
   updatedAt: Date;
   friends: mongoose.Types.ObjectId[];
   friendRequests: mongoose.Types.ObjectId[];
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
 }
 
 const UserSchema: Schema = new Schema(
@@ -49,6 +51,8 @@ const UserSchema: Schema = new Schema(
     isActive: { type: Boolean, default: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
   },
   { timestamps: true } // Automatically manage createdAt and updatedAt
 );

@@ -1,5 +1,5 @@
 import express from 'express';
-import { register, login } from '../controllers/authControllers';
+import { register, login, resetPassword, forgotPassword } from '../controllers/authControllers';
 
 const router = express.Router();
 
@@ -136,5 +136,53 @@ router.post('/register', register);
  *                   example: Server Error
  */
 router.post('/login', login);
+
+/**
+ * @swagger
+ * /api/auth/forgot-password:
+ *   post:
+ *     summary: Forgot password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: User's email address
+ */
+router.post('/forgot-password', forgotPassword);
+
+/**
+ * @swagger
+ * /api/auth/reset-password:
+ *   post:
+ *     summary: Reset password using token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *               - password
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 description: Reset token received via email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: New password
+ */
+router.post('/reset-password', resetPassword);
 
 export default router;
